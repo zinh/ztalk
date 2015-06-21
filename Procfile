@@ -1,1 +1,1 @@
-web: ./bin/minasan foreground
+web: ./bin/ztalk foreground
