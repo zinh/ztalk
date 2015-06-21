@@ -30,7 +30,8 @@ start_cowboy() ->
   Dispatch = cowboy_router:compile([
       {'_', [
           {"/static/[...]", cowboy_static, {priv_dir, ztalk, "static", [{mimetypes, cow_mimetypes, web}]}},
-          {"/", cowboy_static, {priv_file, ztalk, "static/index.html"}}
+          {"/", cowboy_static, {priv_file, ztalk, "static/index.html"}},
+          {"/ws", ztalk_ws_handler, []}
         ]}
     ]),
   ListenPort = 8080,
