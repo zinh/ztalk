@@ -13,4 +13,4 @@ Build
     
 ### Production environment
 
-    $ REBAR_DEFAULT_PROFILE=prod ./rebar3 tar
+    $ make tar
