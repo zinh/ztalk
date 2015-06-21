@@ -1,6 +1,46 @@
-<html>
-  <title>Hello world</title>
-  <body>
-    Hello from Cowboy!
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+  <title>ZTalk</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <style>
+    #chat_msg{
+      height: 400px;
+      background-color:#E0E0E0;
+      overflow:scroll;
+    }
+  </style>
+  <script type="text/javascript">
+    var socket = null;
+    function init(){
+      var name = prompt("Please choose a nickname");
+      if (name != null){
+        socket = new WebSocket("ws://zstage-24028.apse1.nitrousbox.com:8080/ws");
+        socket.onmessage = function(event){
+          var msg = event.data;
+          var chat_msg = document.getElementById("chat_msg");
+          var current_msg = chat_msg.innerHTML;
+          chat_msg.innerHTML = current_msg + msg + "<br/>";
+        };
+        socket.onopen = function(event){
+          socket.send(name);
+        }
+      }
+    }
+    window.onload = init;
+    function send_msg(event){
+      if(event.keyCode == 13 && socket != null){
+        var msg = document.getElementById("chat_box");
+        if (msg.value != null){
+          socket.send(msg.value);
+          msg.value = "";
+        }
+      }
+    }
+</script>
+<body>
+  <div class="row">
+  <div class="col-md-6 col-md-offset-3" id="chat_msg"></div>
+  <input class="col-md-6 col-md-offset-3" id="chat_box" placeholder="What do you want to say?" type="text" onkeydown="send_msg(event)"></input>
+  </div>
+</body>
 </html>
