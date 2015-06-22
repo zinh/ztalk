@@ -7,7 +7,7 @@
        {ref,"d544a494af4dbc810fc9c15eaf5cc050cced1501"}},
   1},
  {<<"gproc">>,
-  {git,"git@github.com:uwiger/gproc.git",
+  {git,"git://github.com/uwiger/gproc.git",
        {ref,"509be53f0813464d462266d1cf112d8a6499be6a"}},
   0},
  {<<"cowboy">>,
