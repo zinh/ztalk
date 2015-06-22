@@ -34,5 +34,10 @@ start_cowboy() ->
           {"/ws", ztalk_ws_handler, []}
         ]}
     ]),
-  ListenPort = 8080,
+  ListenPort = case os:getenv("PORT") of
+    false ->
+      8080;
+    P ->
+      erlang:list_to_integer(P)
+  end,
   cowboy:start_http(ztalk_cowboy, 100, [{port, ListenPort}], [{env, [{dispatch, Dispatch}]}]).

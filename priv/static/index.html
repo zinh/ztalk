@@ -14,7 +14,8 @@
     function init(){
       var name = prompt("Please choose a nickname");
       if (name != null){
-        socket = new WebSocket("ws://zstage-24028.apse1.nitrousbox.com:8080/ws");
+        var loc = window.location;
+        socket = new WebSocket("ws://" + loc.host + "/ws");
         socket.onmessage = function(event){
           var msg = event.data;
           var chat_msg = document.getElementById("chat_msg");
