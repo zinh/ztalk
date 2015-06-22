@@ -1,1 +1,1 @@
-web: erl -pa ebin deps/*/ebin -noshell -noinput -s ztalk
+web: /app/_build/default/rel/ztalk/bin/ztalk foreground
