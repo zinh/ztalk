@@ -10,4 +10,7 @@ clean:
 tar:
 	./rebar3 as prod tar
 
+release:
+	./rebar3 do release
+
 all: compile run
