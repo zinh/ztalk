@@ -21,6 +21,7 @@
           var chat_msg = document.getElementById("chat_msg");
           var current_msg = chat_msg.innerHTML;
           chat_msg.innerHTML = current_msg + msg + "<br/>";
+          chat_msg.scrollTop = chat_msg.scrollHeight;
         };
         socket.onopen = function(event){
           socket.send(name);
