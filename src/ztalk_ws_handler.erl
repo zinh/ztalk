@@ -2,7 +2,6 @@
 -export([init/3, websocket_init/3, websocket_handle/3, websocket_info/3, websocket_terminate/3]).
 -record(state, {username, login = false}).
 -define(WSKey, {pubsub,wssocket}).
-
 init({tcp, http}, _Reg, _Opts) ->
   {upgrade, protocol, cowboy_websocket}.
 
@@ -25,8 +24,10 @@ websocket_handle({text, Msg}, Req, #state{login = true} = State) ->
 websocket_info({_Pid, ?WSKey, Msg}, Req, State) ->
   {reply, {text, Msg}, Req, State}.
 
-websocket_terminate(_Reason, _Req, _State) ->
+websocket_terminate(_Reason, _Req, State) ->
+  Name = State#state.username,
   gproc:unreg({p, l, ?WSKey}),
+  broadcast(<<Name/binary, " has left">>),
   ok.
 
 %% Private functions
